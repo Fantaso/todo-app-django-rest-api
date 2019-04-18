@@ -1,0 +1,41 @@
+version: "3"
+
+services:
+  # APPLICATION
+  web:
+    image: fantaso/django-rest-web:1
+    container_name: django-rest-web
+    build:
+      context: ./django_rest
+      dockerfile: Dockerfile
+    labels:
+      /info: "Infographic of how the todo restapi works"
+      /todo: "Django restframework to interact with the todo api"
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./django_rest:/django-app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  # DATABASE
+  db:
+    image: postgres:11.2
+    container_name: django-rest-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./django-rest-db:/django-db
+    environment:
+      - POSTGRES_DB=todo-db
+      - POSTGRES_USER=todo-postgres
+      - POSTGRES_PASSWORD=todo-password
+      - PGDATA=/django-db
+
+  # DATABASE CLIENT
+  db_client:
+    image: adminer
+    container_name: django-rest-db-client
+    ports:
+      - "8080:8080"
