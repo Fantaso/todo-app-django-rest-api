@@ -4,6 +4,7 @@
 
 ### Own Created ###
 django-rest-db/
+migrations/
 
 
 ### Django ###
