@@ -15,6 +15,8 @@ class Project(models.Model):
 
     class Meta:
         ordering = ('name',)
+        verbose_name = 'project'
+        verbose_name_plural = 'projects'
 
 
 class Task(models.Model):
@@ -27,7 +29,7 @@ class Task(models.Model):
     title = models.CharField(max_length=150, blank=False)
     description = models.CharField(max_length=500, null=True, blank=True)
     deadline = models.DateTimeField(null=True, blank=True)
-    priority = models.CharField(max_length=6, choices=PRIORITY_CHOICES)
+    priority = models.IntegerField(choices=PRIORITY_CHOICES)
     done = models.BooleanField(default=False)
     done_when = models.DateTimeField(null=True, blank=True)
 
@@ -39,7 +41,8 @@ class Task(models.Model):
 
     class Meta:
         ordering = ('-created_at',)
-        # index_together = (('id', 'slug'),)
+        verbose_name = 'task'
+        verbose_name_plural = 'tasks'
 
 
 class Reminder(models.Model):
@@ -53,6 +56,8 @@ class Reminder(models.Model):
 
     class Meta:
         ordering = ('-task', '-date')
+        verbose_name = 'reminder'
+        verbose_name_plural = 'reminders'
 
 
 class Comment(models.Model):
@@ -66,3 +71,5 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ('-created_at',)
+        verbose_name = 'comment'
+        verbose_name_plural = 'comments'
