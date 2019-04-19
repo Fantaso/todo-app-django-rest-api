@@ -1,4 +1,5 @@
 django
 djangorestframework
+drf-extensions
 psycopg2
 psycopg2-binary
