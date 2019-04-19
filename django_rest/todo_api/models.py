@@ -1,10 +1,12 @@
-from django.db import models
 from datetime import datetime
+
+from django.db import models
+# from django.urls import reverse
+# from rest_framework.reverse import reverse as api_reverse
 
 
 class Project(models.Model):
     name = models.CharField(max_length=50, blank=False, unique=True)
-
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -16,16 +18,18 @@ class Project(models.Model):
 
 
 class Task(models.Model):
-    PRIORITY_CHOICES = ((1, 'Low'), (2, 'Medium'), (3, 'High'))
+    LOW = 1
+    MEDIUM = 2
+    HIGH = 3
+    PRIORITY_CHOICES = ((LOW, 'Low'), (MEDIUM, 'Medium'), (HIGH, 'High'))
 
     project = models.ForeignKey('Project', on_delete=models.CASCADE, related_name='tasks_ids')
-
     title = models.CharField(max_length=150, blank=False)
-    description = models.CharField(max_length=500, blank=True)
-    deadline = models.DateTimeField()
+    description = models.CharField(max_length=500, null=True, blank=True)
+    deadline = models.DateTimeField(null=True, blank=True)
     priority = models.CharField(max_length=6, choices=PRIORITY_CHOICES)
-    # child_task
-    # parent_task
+    done = models.BooleanField(default=False)
+    done_when = models.DateTimeField(null=True, blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -35,13 +39,12 @@ class Task(models.Model):
 
     class Meta:
         ordering = ('-created_at',)
+        # index_together = (('id', 'slug'),)
 
 
 class Reminder(models.Model):
     task = models.ForeignKey('Task', on_delete=models.CASCADE, related_name='reminders_ids')
-
     date = models.DateTimeField(blank=False)
-
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -49,14 +52,12 @@ class Reminder(models.Model):
         return f'<reminder: {self.date}>'
 
     class Meta:
-        ordering = ('-date',)
+        ordering = ('-task', '-date')
 
 
 class Comment(models.Model):
     task = models.ForeignKey('Task', on_delete=models.CASCADE, related_name='comments_ids')
-
     comment = models.CharField(max_length=500, blank=False)
-
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

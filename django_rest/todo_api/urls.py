@@ -1,14 +1,8 @@
-from django.urls import path, include
+from django.urls import include, path
+
 from . import views
-from rest_framework import routers
-
-router = routers.DefaultRouter()
-
-router.register('projects', views.ProjectView)
-router.register('tasks', views.TaskView)
-router.register('comments', views.CommentView)
-router.register('reminders', views.ReminderView)
+from .routers import todo_api_router
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('', include(todo_api_router.urls)),
 ]
