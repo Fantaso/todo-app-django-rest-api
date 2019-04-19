@@ -8,7 +8,6 @@ from . import models
 class ProjectAdmin(admin.ModelAdmin):
     list_display = ['name', 'created_at', 'updated_at']
     list_filter = ['created_at', 'updated_at']
-    prepopulated_fields = {'slug': ('name',)}
 
 
 ######### TASK ADMIN #########
