@@ -21,21 +21,21 @@ projects_tasks = projects_router.register('tasks',
                                           views.TaskView,
                                           base_name='project-tasks',
                                           parents_query_lookups=['project'])
-# parents_query_lookups = Task.objects.filter(task={task_id})
+# parents_query_lookups = Task.objects.filter(task={task})
 
 # 2nd Degree: NESTINGVIEW: CommentView
 projects_tasks.register('comments',
                         views.CommentView,
                         base_name='project-task-comments',
                         parents_query_lookups=['task__project', 'task'])
-# parents_query_lookups = Reminder.objects.filter(task__project={project_id}, task={task_id})
+# parents_query_lookups = Reminder.objects.filter(task__project={project}, task={task})
 
 # 2nd Degree: NESTINGVIEW: ReminderView
 projects_tasks.register('reminders',
                         views.ReminderView,
                         base_name='project-task-reminders',
                         parents_query_lookups=['task__project', 'task'])
-# parents_query_lookups = Reminder.objects.filter(task__project={project_id}, task={task_id})
+# parents_query_lookups = Reminder.objects.filter(task__project={project}, task={task})
 
 
 ######### REGISTER TaskView #########

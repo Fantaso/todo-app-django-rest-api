@@ -17,7 +17,7 @@ class TaskSerializer(serializers.ModelSerializer):
         lookup_field = 'id'
         model = Task
         fields = ('id', 'url', 'project', 'title', 'description',
-                  'deadline', 'priority', 'reminders_ids', 'comments_ids')
+                  'deadline', 'priority', 'is_done', 'reminders_ids', 'comments_ids')
         read_only_fields = ('id', 'reminders_ids', 'comments_ids')
 
     def validate_deadline(self, value):

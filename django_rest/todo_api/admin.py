@@ -14,7 +14,7 @@ class ProjectAdmin(admin.ModelAdmin):
 @admin.register(models.Task)
 class TasktAdmin(admin.ModelAdmin):
     list_display = ['project', 'title', 'description', 'deadline',
-                    'priority', 'done', 'done_when', 'created_at', 'updated_at']
+                    'priority', 'is_done', 'created_at', 'updated_at']
     list_filter = ['created_at', 'updated_at']
 
 

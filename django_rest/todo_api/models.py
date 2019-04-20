@@ -25,13 +25,12 @@ class Task(models.Model):
     HIGH = 3
     PRIORITY_CHOICES = ((LOW, 'Low'), (MEDIUM, 'Medium'), (HIGH, 'High'))
 
-    project = models.ForeignKey('Project', on_delete=models.CASCADE, related_name='tasks_ids')
+    project = models.ForeignKey('Project', related_name='tasks_ids', on_delete=models.CASCADE)
     title = models.CharField(max_length=150, blank=False)
     description = models.CharField(max_length=500, null=True, blank=True)
     deadline = models.DateTimeField(null=True, blank=True)
     priority = models.IntegerField(choices=PRIORITY_CHOICES)
-    done = models.BooleanField(default=False)
-    done_when = models.DateTimeField(null=True, blank=True)
+    is_done = models.BooleanField(default=False)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -46,7 +45,7 @@ class Task(models.Model):
 
 
 class Reminder(models.Model):
-    task = models.ForeignKey('Task', on_delete=models.CASCADE, related_name='reminders_ids')
+    task = models.ForeignKey('Task', related_name='reminders_ids', on_delete=models.CASCADE)
     date = models.DateTimeField(blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -55,13 +54,13 @@ class Reminder(models.Model):
         return f'<reminder: {self.date}>'
 
     class Meta:
-        ordering = ('-task', '-date')
+        ordering = ('-date',)
         verbose_name = 'reminder'
         verbose_name_plural = 'reminders'
 
 
 class Comment(models.Model):
-    task = models.ForeignKey('Task', on_delete=models.CASCADE, related_name='comments_ids')
+    task = models.ForeignKey('Task', related_name='comments_ids', on_delete=models.CASCADE)
     comment = models.CharField(max_length=500, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

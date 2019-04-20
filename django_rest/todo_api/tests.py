@@ -1,18 +1,13 @@
-# from django.contrib.auth import get_user_model
-# from rest_framework_jwt.settings import api_settings
+from datetime import datetime, timedelta
 
+import pytz
 
 from django.urls import reverse
-
+from django.utils import timezone
 from rest_framework import status
-# from rest_framework.reverse import reverse as api_reverse
 from rest_framework.test import APITestCase
 
 from .models import Comment, Project, Reminder, Task
-
-from django.utils import timezone
-from datetime import datetime, timedelta
-import pytz
 
 
 ######### TESTS PROJECT #########
