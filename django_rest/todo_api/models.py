@@ -39,7 +39,7 @@ class Task(models.Model):
         return f'<task: {self.title}>'
 
     class Meta:
-        ordering = ('-created_at',)
+        ordering = ('-priority',)
         verbose_name = 'task'
         verbose_name_plural = 'tasks'
 
