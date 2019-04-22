@@ -2,14 +2,14 @@ version: "3"
 
 services:
   # APPLICATION
-  web:
-    image: fantaso/django-rest-web:1
-    container_name: django-rest-web
+  api:
+    image: fantaso/django-rest-api:1
+    container_name: django-rest-api
     build:
       context: ./django_rest
       dockerfile: Dockerfile
     labels:
-      /info: "Infographic of how the todo restapi works"
+      # /info: "Infographic of how the todo restapi works"
       /todo: "Django restframework to interact with the todo api"
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
