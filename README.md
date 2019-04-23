@@ -203,6 +203,16 @@ This Pattern applied with to the **_Reminder_** endpoints shown in the previous 
 
 #### 4. Tests INFO
 
+###### Using ![docker-compose][docker-compose]:
+
+
+1. Run the API ToDo app tests locally with:
+```sh
+docker-compose run --rm api python manage.py test
+```
+
+<br>
+
 To find a pattern for naming the testing methods of the application and having the data necessary to test the API djangoapp a txtfile was created. This file contains two main tables:
 1. **ENDPOINTS SUMMARY** _(Which is what's describe previously in USAGE -> AVAILABLE ENDPOINTS -> ENDPOINT LIST section)_
 2. **TESTS** _A table containing: Verbose name, Test method name, Http-methods, Reverse(name), Request(URI)_
