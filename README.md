@@ -80,8 +80,6 @@ docker-compose up
 <br>
 
 #### 2. Access and Interact with API Front-end app (django restframework)
-<!-- Visit Raspberry Pi [Repository][raspberry-repo] -->
-
 
 <!-- <br><br> -->
 
@@ -93,7 +91,7 @@ Once docker-compose is done downloading all images and none of the services fail
 
 #### 1. Access and Interact with API Front-end app (django restframework)
 
-The api fron-end application should be running and you can access it in your web browser at _http://0.0.0.0:8000/todo_ which will take you to the web app interface that will allow you interact and use the API via the web browser.
+The api fron-end application should be running and you can access it in your web browser at _http://0.0.0.0:8000/todo/_ which will take you to the web app interface that will allow you interact and use the API via the web browser.
 
 <br>
 
@@ -126,13 +124,15 @@ So, the database relationship between the models stays like this.
 
 <br>
 
+
 ###### Endpoint List
 URI Example: `http://0.0.0.0:8000/todo/projects/<id>/`
 
-|| Available Methods | URI |
-| -: | :- || :- |
-||||
-|| **Project Endpoints** ||
+
+| | Available Methods | URI |
+| -: | :- | :- |
+| | | |
+| | **Project Endpoints** | |
 | 1. | `GET` `POST`                      | `projects/` |
 | 2. | `GET` `PUT` `PATCH` `DELETE`      | `projects/<id>/` |
 | 3. | `GET` `POST`                      | `projects/<id>/tasks/` |
@@ -141,22 +141,23 @@ URI Example: `http://0.0.0.0:8000/todo/projects/<id>/`
 | 6. | `GET` `PUT` `PATCH` `DELETE`      | `projects/<id>/tasks/<id>/comments/<id>/` |
 | 7. | `GET` `POST`                      | `projects/<id>/tasks/<id>/reminders/` |
 | 8. | `GET` `PUT` `PATCH` `DELETE`      | `projects/<id>/tasks/<id>/reminders/<id>/` |
-||||
-|| **Task Endpoints** ||
+| | | |
+| | **Task Endpoints** | |
 | 1. | `GET` `POST`                      | `tasks/` |
 | 2. | `GET` `PUT` `PATCH` `DELETE`      | `tasks/<id>/` |
 | 3. | `GET` `POST`                      | `tasks/<id>/comments/` |
 | 4. | `GET` `PUT` `PATCH` `DELETE`      | `tasks/<id>/comments/<id>/` |
 | 5. | `GET` `POST`                      | `tasks/<id>/reminders/` |
 | 6. | `GET` `PUT` `PATCH` `DELETE`      | `tasks/<id>/reminders/<id>/` |
-||||
-|| **Comment Endpoints** ||
+| | | |
+| | **Comment Endpoints** | |
 | 1. | `GET` `POST`                      | `comments/` |
 | 2. | `GET` `PUT` `PATCH` `DELETE`      | `comments/<id>/` |
-||||
-|| **Reminder Endpoints** ||
+| | | |
+| | **Reminder Endpoints** | |
 | 1. | `GET` `POST`                      | `reminders/` |
 | 2. | `GET` `PUT` `PATCH` `DELETE`      | `reminders/<id>/` |
+
 
 <br>
 
@@ -164,25 +165,29 @@ Each model model endpoints follows a pattern of CRUDL (Create, Retrieve, Update,
 
 Let's take **Comment endpoints** as an example:
 
-|| Method | URI | Description |
-| -: | :- || :- |
-|| URI Example:             |  `http://0.0.0.0:8000/todo/comments/<id>/` ||
-||||
+
+| | Method | URI | Description |
+| -: | :- | :- | :- |
+| | URI Example:             |  `http://0.0.0.0:8000/todo/comments/<id>/` | |
+| | | |
 | 1. | `GET`                | `comments/`       | Get a **List** of all Comments available |   
 | 2. | `POST`               | `comments/`       | **Create** a comment |    
 | 3. | `GET`                | `comments/<id>/`  | **Retrieve** a comment's details with the id of the comment in the uri <id> section e.g. `comments/2/`|    
 | 4. | `PUT` or `PATCH`     | `comments/<id>/`  | **Update** a comment's details |    
 | 5. | `DELETE`             | `comments/<id>/`  | **Delete** a comment |    
 
+
 <br>
+
 
 This Pattern applied with the **_Reminder_** endpoints shown in the previous table is applied to all other Endpoints (Project, Task, Comment) and they are applied the same way in the nested relationships between the models. Example:
 
 
-|| Method | URI | Description |
-| -: | :- || :- |
-|| URI Example:             |  `http://0.0.0.0:8000/todo/projects/<id>/tasks/<id>` ||
-||||
+
+| | Method | URI | Description |
+| -: | :- | | :- |
+| | URI Example:             |  `http://0.0.0.0:8000/todo/projects/<id>/tasks/<id>` | |
+| | | | |
 | 1. | `GET`                | `projects/<id>/tasks/`       | Get a **List** of all Tasks available in a specific project. With project's id. e.g.: `projects/2/tasks/`  |   
 | 2. | `POST`               | `projects/<id>/tasks/`       | **Create** a task for a specific project |    
 | 3. | `GET`                | `projects/<id>/tasks/<id>/`  | **Retrieve** a task's details of a specific project |    
@@ -203,7 +208,7 @@ To find a pattern for naming the testing methods of the application and having t
 
 
 | Legend | Table Column | Description |
-| -: | :- || :- |
+| -: | :- | | :- |
 |1| **Verbose name** | Action of the method humanly named (not used in the app, just for better understanding of the table of endpoints) |
 |2| **Test method name** | the test case unique name (used in the app in the tests.py file in the application)' |
 |3| **Http-methods** | HTTP method to test' |

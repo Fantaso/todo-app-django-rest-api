@@ -9,7 +9,6 @@ services:
       context: ./django_rest
       dockerfile: Dockerfile
     labels:
-      # /info: "Infographic of how the todo restapi works"
       /todo: "Django restframework to interact with the todo api"
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
@@ -26,8 +25,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - db-volume:/django-db       # use this if you want to use a docker volume
-      # - ./django-rest-db:/django-db   # use this if you the volume to be on your repo root directory
+      - db-volume:/django-db
     environment:
       - POSTGRES_DB=todo-db
       - POSTGRES_USER=todo-postgres
