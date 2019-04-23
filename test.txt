@@ -1,0 +1,267 @@
+#################################################################################################################################################
+LEGEND
+#################################################################################################################################################
+VERBOSE NAME        =   'action of the method humanly named (not used in the app, just for better understanding of the table of endpoints)'
+TEST METHOD NAME    =   'the test case unique name (used in the app in the tests.py file in the application)'
+HTTP-METHODS        =   'HTTP method to test'
+REVERSE(NAME)       =   'the Django "reverse" function to get the relative URI path to be used in the request to test the endpoint (not including the base_path['http://...'])'
+REQUEST(URL)        =   'the relative path used to test URI. <id> is the id of the object to be retrieved'
+
+
+#################################################################################################################################################
+#################################################################################################################################################
+ENDPOINTS SUMMARY
+#################################################################################################################################################
+#################################################################################################################################################
+HTTP-METHODS            REVERSE(NAME)                      REQUEST(URL)
+-------------------------------------------------------------------------------------------------------------------------------------------------
+GET                     admin                              admin/
+
+GET                     api-root                           todo/
+
+
+########## ALL ENDPOINT FROM HERE HAVE THE PREFIX_PATH OF: todo/... e.g. 'todo/projects/<id>/' -from REVERSE(NAME=project-detail) ##########
+
+########## PROJECT ##########
+GET POST                project-list                       projects/
+GET PUT PATCH DELETE    project-detail                     projects/<id>/
+GET POST                project-tasks-list                 projects/<id>/tasks/
+GET PUT PATCH DELETE    project-tasks-detail               projects/<id>/tasks/<id>/
+GET POST                project-task-comments-list         projects/<id>/tasks/<id>/comments/
+GET PUT PATCH DELETE    project-task-comments-detail       projects/<id>/tasks/<id>/comments/<id>/
+GET POST                project-task-reminders-list        projects/<id>/tasks/<id>/reminders/
+GET PUT PATCH DELETE    project-task-reminders-detail      projects/<id>/tasks/<id>/reminders/<id>/
+
+
+########## TASK ##########
+GET POST                task-list                          tasks/
+GET PUT PATCH DELETE    task-detail                        tasks/<id>/
+GET POST                task-comments-list                 tasks/<id>/comments/
+GET PUT PATCH DELETE    task-comments-detail               tasks/<id>/comments/<id>/
+GET POST                task-reminders-list                tasks/<id>/reminders/
+GET PUT PATCH DELETE    task-reminders-detail              tasks/<id>/reminders/<id>/
+
+
+########## COMMENT ##########
+GET POST                comment-list                       comments/
+GET PUT PATCH DELETE    comment-detail                     comments/<id>/
+
+
+########## REMINDER ##########
+GET POST                reminder-list                      reminders/
+GET PUT PATCH DELETE    reminder-detail                    reminders/<id>/
+
+
+
+
+#################################################################################################################################################
+#################################################################################################################################################
+TESTS
+#################################################################################################################################################
+#################################################################################################################################################
+
+
+#################################################################################################################################################
+API ROOT ENDPOINT
+#################################################################################################################################################
+VERBOSE NAME                        TEST METHOD NAME                                    HTTP-METHODS    REVERSE(NAME)                   REQUEST(URL)
+-------------------------------------------------------------------------------------------------------------------------------------------------
+root_endpoint_retrieve              test_api_root_get                                   GET             api-root                        todo/
+
+
+#################################################################################################################################################
+PROJECT ENDPOINTS                   Project(models.Model)
+#################################################################################################################################################
+VERBOSE NAME                        TEST METHOD NAME                                HTTP-METHODS    REVERSE(NAME)                   REQUEST(URL)
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+########## BASIC TESTING (CRUDL) AND FIELDS VALIDATORS AND INITIAL STATE ##########
+
+projects_retrieve                   test_project_list_get                           GET             project-list                    todo/projects/
+project_create                      test_project_list_post                          POST            project-list                    todo/projects/
+
+project_retrieve                    test_project_detail_get                         GET             project-detail                  todo/projects/<id>/
+project_update_put                  test_project_detail_put                         PUT             project-detail                  todo/projects/<id>/
+project_update_patch                test_project_detail_patch                       PATCH           project-detail                  todo/projects/<id>/
+project_delete                      test_project_detail_delete                      DELETE          project-detail                  todo/projects/<id>/
+
+project_name_unique                 test_project_list_post_name_unique              POST            project-list                    todo/projects/
+project_name_length                 test_project_list_post_name_length              POST            project-list                    todo/projects/
+project_name_blank                  test_project_list_post_name_blank               POST            project-list                    todo/projects/
+
+project_created_at                  test_project_list_post_created_at               POST            project-list                    todo/projects/
+project_updated_at                  test_project_list_put_updated_at                PUT             project-detail                  todo/projects/<id>/
+
+project_db_retrieve_ordering        test_project_list_get_db_retrieve_ordering      GET             project-list                    todo/projects/
+
+
+########## NESTED TESTING (CRUDL) ##########
+
+project_tasks_retrieve              project_tasks_list_get                          GET             project-tasks-list              todo/projects/<id>/tasks/
+project_tasks_create                project_tasks_list_post                         POST            project-tasks-list              todo/projects/<id>/tasks/
+
+project_tasks_retrieve              project_tasks_detail_get                        GET             project-tasks-detail            todo/projects/<id>/tasks/<id>/
+project_tasks_update_put            project_tasks_detail_put                        PUT             project-tasks-detail            todo/projects/<id>/tasks/<id>/
+project_tasks_update_patch          project_tasks_detail_patch                      PATCH           project-tasks-detail            todo/projects/<id>/tasks/<id>/
+project_tasks_delete                project_tasks_detail_delete                     DELETE          project-tasks-detail            todo/projects/<id>/tasks/<id>/
+
+
+project_task_comments_retrieve      project_task_comments_list_get                  GET             project-task-comments-list      todo/projects/<id>/tasks/<id>/comments/
+project_task_comments_create        project_task_comments_list_post                 POST            project-task-comments-list      todo/projects/<id>/tasks/<id>/comments/
+
+project_task_comment_retrieve       project_task_comments_detail_get                GET             project-task-comments-detail    todo/projects/<id>/tasks/<id>/comments/<id>/
+project_task_comment_update_put     project_task_comments_detail_put                PUT             project-task-comments-detail    todo/projects/<id>/tasks/<id>/comments/<id>/
+project_task_comment_update_patch   project_task_comments_detail_patch              PATCH           project-task-comments-detail    todo/projects/<id>/tasks/<id>/comments/<id>/
+project_task_comment_delete         project_task_comments_detail_delete             DELETE          project-task-comments-detail    todo/projects/<id>/tasks/<id>/comments/<id>/
+
+
+project_task_reminders_retrieve     project_task_reminders_list_get                 GET             project-task-reminders-list     todo/projects/<id>/tasks/<id>/reminders/
+project_task_reminders_create       project_task_reminders_list_post                POST            project-task-reminders-list     todo/projects/<id>/tasks/<id>/reminders/
+
+project_task_reminder_retrieve      project_task_reminders_detail_get               GET             project-task-reminders-detail   todo/projects/<id>/tasks/<id>/reminders/<id>/
+project_task_reminder_update_put    project_task_reminders_detail_put               PUT             project-task-reminders-detail   todo/projects/<id>/tasks/<id>/reminders/<id>/
+project_task_reminder_update_patch  project_task_reminders_detail_patch             PATCH           project-task-reminders-detail   todo/projects/<id>/tasks/<id>/reminders/<id>/
+project_task_reminder_delete        project_task_reminders_detail_delete            DELETE          project-task-reminders-detail   todo/projects/<id>/tasks/<id>/reminders/<id>/
+
+
+#################################################################################################################################################
+TASK ENDPOINTS                      Task(models.Model)
+#################################################################################################################################################
+VERBOSE NAME                        TEST METHOD NAME                                HTTP-METHODS    REVERSE(NAME)                   REQUEST(URL)
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+########## BASIC TESTING (CRUDL) AND FIELDS VALIDATORS AND INITIAL STATE ##########
+
+
+task_retrieve                       test_task_list_get                              GET             task-list                       todo/tasks/
+task_create                         test_task_list_post                             POST            task-list                       todo/tasks/
+
+task_retrieve                       test_task_detail_get                            GET             task-detail                     todo/tasks/<id>/
+task_update_put                     test_task_detail_put                            PUT             task-detail                     todo/tasks/<id>/
+task_update_patch                   test_task_detail_patch                          PATCH           task-detail                     todo/tasks/<id>/
+task_delete                         test_task_detail_delete                         DELETE          task-detail                     todo/tasks/<id>/
+
+task_deadline_not_required          test_task_list_post_deadline_not_required       POST            task-list                       todo/tasks/
+task_is_done_default                test_task_list_post_is_done_default             POST            task-list                       todo/tasks/
+task_is_done_update                 test_task_list_post_is_done_update              PUT             task-detail                     todo/tasks/<id>/
+
+task_db_retrieve_ordering           test_task_list_get_db_retrieve_ordering         GET             task-list                       todo/tasks/
+
+
+########## NESTED TESTING (CRUDL) ##########
+
+
+task_comments_retrieve              test_task_comments_list_get                     GET             task-comments-list              todo/tasks/<id>/comments/
+task_comments_create                test_task_comments_list_post                    POST            task-comments-list              todo/tasks/<id>/comments/
+
+task_comment_retrieve               test_task_comments_detail_get                   GET             task-comments-detail            todo/tasks/<id>/comments/<id>/
+task_comment_update_put             test_task_comments_detail_put                   PUT             task-comments-detail            todo/tasks/<id>/comments/<id>/
+task_comment_update_patch           test_task_comments_detail_patch                 PATCH           task-comments-detail            todo/tasks/<id>/comments/<id>/
+task_comment_delete                 test_task_comments_detail_delete                DELETE          task-comments-detail            todo/tasks/<id>/comments
+
+task_reminders_retrieve             test_task_reminders_list_get                    GET             task-reminders-list             todo/tasks/<id>/reminders/
+task_reminders_create               test_task_reminders_list_post                   POST            task-reminders-list             todo/tasks/<id>/reminders/
+
+task_reminder_retrieve              test_task_reminders_detail_get                  GET             task-reminders-detail           todo/tasks/<id>/reminders/<id>/
+task_reminder_update_put            test_task_reminders_detail_put                  PUT             task-reminders-detail           todo/tasks/<id>/reminders/<id>/
+task_reminder_update_patch          test_task_reminders_detail_patch                PATCH           task-reminders-detail           todo/tasks/<id>/reminders/<id>/
+task_reminder_delete                test_task_reminders_detail_delete               DELETE          task-reminders-detail           todo/tasks/<id>/reminders/<id>/
+
+
+#################################################################################################################################################
+COMMENT ENDPOINTS                   Comment(models.Model)
+#################################################################################################################################################
+VERBOSE NAME                        TEST METHOD NAME                                HTTP-METHODS    REVERSE(NAME)                   REQUEST(URL)
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+comments_retrieve                   test_comment_list_get                           GET             comment-list                    todo/comments/
+comment_create                      test_comment_list_post                          POST            comment-list                    todo/comments/
+
+comment_retrieve                    test_comment_detail_get                         GET             comment-detail                  todo/comments/<id>/
+comment_update_put                  test_comment_detail_put                         PUT             comment-detail                  todo/comments/<id>/
+comment_update_patch                test_comment_detail_patch                       PATCH           comment-detail                  todo/comments/<id>/
+comment_delete                      test_comment_detail_delete                      DELETE          comment-detail                  todo/comments/<id>/
+
+comment_comment_required            test_comment_list_post_comment_required         POST            comment-list                    todo/comments/
+
+comment_db_retrieve_ordering        test_comment_list_get_db_retrieve_ordering      GET             comment-list                    todo/comments/
+
+
+#################################################################################################################################################
+REMINDER ENDPOINTS                  Reminder(models.Model)
+#################################################################################################################################################
+VERBOSE NAME                        TEST METHOD NAME                                HTTP-METHODS    REVERSE(NAME)                  REQUEST(URL)
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+reminders_retrieve                  test_reminder_list_get                          GET             reminder-list                  todo/reminders/
+reminder_create                     test_reminder_list_post                         POST            reminder-list                  todo/reminders/
+
+reminder_retrieve                   test_reminder_detail_get                        GET             reminder-detail                todo/reminders/<id>/
+reminder_update_put                 test_reminder_detail_put                        PUT             reminder-detail                todo/reminders/<id>/
+reminder_update_patch               test_reminder_detail_patch                      PATCH           reminder-detail                todo/reminders/<id>/
+reminder_delete                     test_reminder_detail_delete                     DELETE          reminder-detail                todo/reminders/<id>/
+
+reminder_date_required              test_reminder_list_post_date_required           POST            reminder-list                  todo/reminders/
+
+reminder_db_retrieve_ordering       test_reminder_list_get_db_retrieve_ordering     GET             reminder-list                  todo/reminders/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+FILES FORMAT URLS                  http://example.com/projects/?format=csv | http://example.com/organizations.csv/
+--------------------------------------------------------------------------------------------------
+project-list                       projects[a-z0-9]/?format=csv,json,html,etc
+project-detail                     projects/<id>[a-z0-9]/?
+project-tasks-list                 projects/<id>/tasks[a-z0-9]/?
+project-tasks-detail               projects/<id>/tasks/<id>\(<format>[a-z0-9]+)/?$
+project-task-comments-list         projects/<id>/tasks/<id>/comments[a-z0-9]/?
+project-task-comments-detail       projects/<id>/tasks/<id>/comments/<id>[a-z0-9]/?
+project-task-reminders-list        projects/<id>/tasks/<id>/reminders[a-z0-9]/?
+project-task-reminders-detail      projects/<id>/tasks/<id>/reminders/<id>[a-z0-9]/?
+task-list                          tasks[a-z0-9]/?
+task-detail                        tasks/<id>[a-z0-9]/?
+task-comments-list                 tasks/<id>/comments[a-z0-9]/?
+task-comments-detail               tasks/<id>/comments/<id>[a-z0-9]/?
+task-reminders-list                tasks/<id>/reminders[a-z0-9]/?
+task-reminders-detail              tasks/<id>/reminders/<id>[a-z0-9]/?
+comment-list                       comments[a-z0-9]/?
+comment-detail                     comments/<id>[a-z0-9]/?
+reminder-list                      reminders[a-z0-9]/?
+reminder-detail                    reminders/<id>[a-z0-9]/?
+api-root                           [a-z0-9]/?

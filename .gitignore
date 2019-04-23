@@ -6,7 +6,6 @@
 django-rest-db/
 migrations/
 django_restfw_snippets.py
-*.txt
 
 
 ### Django ###
