@@ -63,7 +63,7 @@ docker-compose build
 
 3. Initialize database and create the database mapping used for persistance in the ToDo app. _Docker-Compose was configured so the data created inside the container from the database service will be store in your repository's root dir. If you want the database data to be store in a docker volume, please go to the `docker-compose.yml` file and in the "Volume" section of the `db` service  choose one or the other._
 ```sh
-docker-compose run --rm api python manage.py makemigrations
+docker-compose run --rm api python manage.py makemigrations todo_api
 ```
 
 4. Apply the database mapping from the app to the database; migrate the database.
