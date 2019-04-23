@@ -61,7 +61,7 @@ git clone https://github.com/Fantaso/todo-app-django-rest-api.git
 docker-compose build
 ```
 
-3. Initialize database and create the database mapping used for persistance in the ToDo app. _Docker-Compose was configured so the data created inside the container from the database service is synched with your computer at the root of the repository's directory's name. the directory's name is "django-rest-db". The folder will be created automatically when you run the next command_
+3. Initialize database and create the database mapping used for persistance in the ToDo app. _Docker-Compose was configured so the data created inside the container from the database service will be store in a docker volume. If you want the database data to be store in your repository's name,please go to the `docker-compose.yml` file and in the "Volume" section of the `db` service  choose one or the other._
 ```sh
 docker-compose run --rm api python manage.py makemigrations
 ```
