@@ -3,8 +3,8 @@ version: "3"
 services:
   # APPLICATION
   api:
-    image: fantaso/django-rest-api:1
-    container_name: django-rest-api
+    image: fantaso/djangorest-api
+    container_name: djangorest-api
     build:
       context: ./django_rest
       dockerfile: Dockerfile
@@ -21,7 +21,7 @@ services:
   # DATABASE
   db:
     image: postgres:11.2
-    container_name: django-rest-db
+    container_name: djangorest-db
     ports:
       - "5432:5432"
     environment:
@@ -31,11 +31,11 @@ services:
       - PGDATA=/django-db
     volumes:
       - db-volume:/django-db
-      
+
   # DATABASE CLIENT
   db_client:
     image: adminer
-    container_name: django-rest-db-client
+    container_name: djangorest-db-client
     ports:
       - "8080:8080"
 
