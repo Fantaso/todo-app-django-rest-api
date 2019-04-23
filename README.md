@@ -61,7 +61,7 @@ git clone https://github.com/Fantaso/todo-app-django-rest-api.git
 docker-compose build
 ```
 
-3. Initialize database and create the database mapping used for persistance in the ToDo app. _Docker-Compose was configured so the data created inside the container from the database service will be store in a docker volume. If you want the database data to be store in your repository's name,please go to the `docker-compose.yml` file and in the "Volume" section of the `db` service  choose one or the other._
+3. Initialize database and create the database mapping used for persistance in the ToDo app. _Docker-Compose was configured so the data created inside the container from the database service will be store in your repository's root dir. If you want the database data to be store in a docker volume, please go to the `docker-compose.yml` file and in the "Volume" section of the `db` service  choose one or the other._
 ```sh
 docker-compose run --rm api python manage.py makemigrations
 ```
@@ -209,7 +209,7 @@ To find a pattern for naming the testing methods of the application and having t
 
 
 | Legend | Table Column | Description |
-| -: | :- | | :- |
+| -: | :- | :- | :- |
 |1| **Verbose name** | Action of the method humanly named (not used in the app, just for better understanding of the table of endpoints) |
 |2| **Test method name** | the test case unique name (used in the app in the tests.py file in the application)' |
 |3| **Http-methods** | HTTP method to test' |

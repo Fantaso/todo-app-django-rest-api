@@ -30,7 +30,8 @@ services:
       - POSTGRES_PASSWORD=todo-password
       - PGDATA=/django-db
     volumes:
-      - db-volume:/django-db
+      - ./django-db:/django-db # use this to store the database data in your repo's root directory
+      # - db-volume:/django-db # use this to store the database data in a docker volume
 
   # DATABASE CLIENT
   db_client:
@@ -41,4 +42,3 @@ services:
 
 volumes:
   db-volume:
-    external: true
