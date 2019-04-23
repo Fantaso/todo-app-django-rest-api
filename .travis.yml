@@ -11,7 +11,7 @@ script:
   - docker-compose up -d
   - docker-compose ps
 
-  - docker-compose run --rm api python manage.py makemigrations
+  - docker-compose run --rm api python manage.py makemigrations todo_api
   - docker-compose run --rm api python manage.py migrate
   - docker-compose run --rm api python manage.py test todo_api
 
