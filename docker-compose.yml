@@ -26,7 +26,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - django-rest-db:/django-db       # use this if you want to use a docker volume
+      - db-volume:/django-db       # use this if you want to use a docker volume
       # - ./django-rest-db:/django-db   # use this if you the volume to be on your repo root directory
     environment:
       - POSTGRES_DB=todo-db
@@ -42,5 +42,5 @@ services:
       - "8080:8080"
 
 volumes:
-  django-rest-db:
-    # external: true
+  db-volume:
+    external: true
