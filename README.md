@@ -209,7 +209,7 @@ To find a pattern for naming the testing methods of the application and having t
 
 
 | Legend | Table Column | Description |
-| -: | :- | :- | :- |
+| -: | :- | :- |
 |1| **Verbose name** | Action of the method humanly named (not used in the app, just for better understanding of the table of endpoints) |
 |2| **Test method name** | the test case unique name (used in the app in the tests.py file in the application)' |
 |3| **Http-methods** | HTTP method to test' |
