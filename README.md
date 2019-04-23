@@ -180,12 +180,12 @@ Let's take **Comment endpoints** as an example:
 <br>
 
 
-This Pattern applied with the **_Reminder_** endpoints shown in the previous table is applied to all other Endpoints (Project, Task, Comment) and they are applied the same way in the nested relationships between the models. Example:
+This Pattern applied with to the **_Reminder_** endpoints shown in the previous table is also applied to all other Endpoints (Project, Task, Comment) and they are applied the same way in the nested relationships between the models. Example:
 
 
 
 | | Method | URI | Description |
-| -: | :- | | :- |
+| -: | :- | :- | :- |
 | | URI Example:             |  `http://0.0.0.0:8000/todo/projects/<id>/tasks/<id>` | |
 | | | | |
 | 1. | `GET`                | `projects/<id>/tasks/`       | Get a **List** of all Tasks available in a specific project. With project's id. e.g.: `projects/2/tasks/`  |   
@@ -193,6 +193,7 @@ This Pattern applied with the **_Reminder_** endpoints shown in the previous tab
 | 3. | `GET`                | `projects/<id>/tasks/<id>/`  | **Retrieve** a task's details of a specific project |    
 | 4. | `PUT` or `PATCH`     | `projects/<id>/tasks/<id>/`  | **Update** a task's details of a specific project |    
 | 5. | `DELETE`             | `projects/<id>/tasks/<id>/`  | **Delete** a task of a specific project |    
+
 
 
 #### 3. Consuming resources example with Requests Python Library (Soon... probably never)
