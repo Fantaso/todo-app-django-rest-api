@@ -24,14 +24,14 @@ services:
     container_name: django-rest-db
     ports:
       - "5432:5432"
-    volumes:
-      - db-volume:/django-db
     environment:
       - POSTGRES_DB=todo-db
       - POSTGRES_USER=todo-postgres
       - POSTGRES_PASSWORD=todo-password
       - PGDATA=/django-db
-
+    volumes:
+      - db-volume:/django-db
+      
   # DATABASE CLIENT
   db_client:
     image: adminer
